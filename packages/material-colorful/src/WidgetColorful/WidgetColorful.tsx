@@ -44,7 +44,7 @@ export const WidgetColorful = <T extends AnyColor, P extends WidgetProps = Widge
         borderColor: valid ? palette.divider : palette.error.main,
         width: pickerWidth || '100%',
         height: pickerHeight,
-    }), [palette, pickerWidth, pickerHeight])
+    }), [palette, pickerWidth, pickerHeight, valid])
 
     const showValueText = schema?.getIn(['view', 'showValueText']) as boolean
     return <>

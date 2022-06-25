@@ -2,7 +2,7 @@ import type { Config } from '@jest/types'
 
 const packages: string[] = ['material-color', 'material-colorful']
 
-const testMatchesLint: string[] = []
+const testMatchesLint: string[] = ['material-color', 'material-colorful']
 
 packages.forEach(pkg => {
     testMatchesLint.push(...[
@@ -19,6 +19,7 @@ const base: Partial<Config.InitialOptions> = {
     },*/
     moduleNameMapper: {
         '^@ui-schema/material-color(.*)$': '<rootDir>/material-color/src$1',
+        '^@ui-schema/material-colorful(.*)$': '<rootDir>/material-colorful/src$1',
     },
     moduleFileExtensions: [
         'ts',
