@@ -2,7 +2,7 @@ import type { Config } from '@jest/types'
 
 const packages: string[] = ['material-color', 'material-colorful']
 
-const testMatchesLint: string[] = ['material-color', 'material-colorful']
+const testMatchesLint: string[] = []
 
 packages.forEach(pkg => {
     testMatchesLint.push(...[
