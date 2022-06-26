@@ -1,6 +1,6 @@
 {
     "name": "@ui-schema/material-colorful",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "React color pickers as MUI widgets for UI-Schema - using react-colorful.",
     "homepage": "https://ui-schema.bemit.codes/docs/material-color/material-color",
     "author": {
