@@ -1,7 +1,7 @@
-import useTheme from "@mui/material/styles/useTheme";
-import {ColorBase} from "../Base/ColorBase/ColorBase";
+import {useTheme} from "@mui/material/styles";
+import {ColorBase} from "@ui-schema/material-color/Base/ColorBase";
 import React from "react";
-import {styleWrapper} from "../styleWrapper";
+import {styleWrapper} from "@ui-schema/material-color/styleWrapper";
 import { AlphaPicker } from 'react-color';
 
 const WrappedAlphaPicker = p => {

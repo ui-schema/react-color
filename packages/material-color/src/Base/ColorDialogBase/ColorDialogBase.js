@@ -1,7 +1,7 @@
 import React from 'react';
 import Dialog from '@mui/material/Dialog'
 import Button from '@mui/material/Button'
-import {ColorBase} from '../ColorBase/ColorBase';
+import {ColorBase} from '@ui-schema/material-color/Base/ColorBase';
 import {Trans} from '@ui-schema/ui-schema/Translate/Trans';
 
 const ColorDialogDialog = ({hasFocus, setFocus, children}) => <Dialog

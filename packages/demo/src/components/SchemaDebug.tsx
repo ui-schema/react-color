@@ -1,8 +1,9 @@
+import Typography from '@mui/material/Typography'
 import { useUIStore } from '@ui-schema/ui-schema/UIStore'
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { List } from 'immutable'
 import { StoreSchemaType, useUIStoreActions } from '@ui-schema/ui-schema'
-import useTheme from '@mui/material/styles/useTheme'
+import { useTheme } from '@mui/material/styles'
 import { ImmutableEditor, themeMaterial } from 'react-immutable-editor'
 import Paper from '@mui/material/Paper'
 
@@ -10,19 +11,25 @@ const StyledEditor: React.FC<{
     data: any
     onChange: any
     getVal: any
+    title?: ReactNode
 }> = p => {
+    const {data, onChange, getVal, title} = p
     const theme = useTheme()
     return <Paper
-        square
         variant={'outlined'}
-        style={{
-            margin: theme.spacing(2) + ' ' + theme.spacing(1),
-            padding: '0 ' + theme.spacing(1),
+        sx={{
+            mx: 1,
+            my: 2,
+            px: 1,
         }}
-        elevation={0}>
+    >
+        {title ?
+            <Typography variant={'subtitle2'} color={'primary'} sx={{my: 0.5}}>{title}</Typography> : null}
 
         <ImmutableEditor
-            {...p}
+            data={data}
+            onChange={onChange}
+            getVal={getVal}
             theme={{
                 ...themeMaterial,
                 type: theme.palette.mode,
@@ -39,21 +46,26 @@ export const SchemaDebug: React.FC<{ schema: StoreSchemaType }> = ({schema}) => 
     const {onChange} = useUIStoreActions()
 
     return <React.Fragment>
-        <React.Fragment>
-            <StyledEditor
-                data={store?.getValues()}
-                onChange={(keys, value) => {
-                    onChange({
-                        storeKeys: List(keys),
-                        scopes: ['value'],
-                        type: 'update',
-                        updater: () => ({value: value}),
-                        required: false,
-                    })
-                }}
-                getVal={keys => store?.getValues().getIn(keys)}
-            />
-            <StyledEditor data={schema} onChange={() => console.log('not implemented')} getVal={keys => schema.getIn(keys)}/>
-        </React.Fragment>
+        <StyledEditor
+            title={<code>UIStore.values</code>}
+            data={store?.getValues()}
+            onChange={(keys, value) => {
+                onChange({
+                    storeKeys: List(keys),
+                    scopes: ['value'],
+                    type: 'update',
+                    updater: () => ({value: value}),
+                    required: false,
+                })
+            }}
+            getVal={keys => store?.getValues().getIn(keys)}
+        />
+
+        <StyledEditor
+            title={<code>Schema</code>}
+            data={schema}
+            onChange={() => console.log('not implemented')}
+            getVal={keys => schema.getIn(keys)}
+        />
     </React.Fragment>
 }

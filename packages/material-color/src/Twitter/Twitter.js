@@ -1,10 +1,10 @@
-import {restrictColors} from "../Base/restrictColors";
-import {ColorBase} from "../Base/ColorBase/ColorBase";
+import {restrictColors} from "@ui-schema/material-color/Base/restrictColors";
+import {ColorBase} from "@ui-schema/material-color/Base/ColorBase";
 import React from "react";
 import merge from "deepmerge";
-import useTheme from "@mui/material/styles/useTheme";
+import {useTheme} from "@mui/material/styles";
 import {TwitterPicker} from 'react-color';
-import {ColorStaticBase} from "../Base/ColorStaticBase/ColorStaticBase";
+import {ColorStaticBase} from "@ui-schema/material-color/Base/ColorStaticBase";
 
 const styles = ({palette, value}) => ({
     'default': {

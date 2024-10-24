@@ -20,7 +20,14 @@ export const PageDemoWidget: React.ComponentType = () => {
             <Box mx={2} py={1} style={{flexGrow: 1}}>
                 <Box mb={2}>
                     <Typography variant={'h1'} gutterBottom>UI-Schema Widgets</Typography>
-                    <Typography variant={'body1'}>Color pickers as UI-Schema widgets using <code>react-colorful</code>.</Typography>
+                    <Typography variant={'body1'}>
+                        {'Color pickers as UI-Schema widgets using '}
+                        <Link
+                            href={'https://www.npmjs.com/package/react-color'}
+                            target={'_blank'} rel={'noopener noreferrer'}
+                        >react-color</Link>
+                        .
+                    </Typography>
                     <Typography variant={'body1'}>
                         <Link
                             href={'https://github.com/ui-schema/react-color/blob/main/packages/demo/src/pages/PageDemoWidget.tsx'}

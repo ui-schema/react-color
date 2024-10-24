@@ -1,10 +1,10 @@
 import React from "react";
 import {ChromePicker} from 'react-color';
 import merge from "deepmerge";
-import useTheme from "@mui/material/styles/useTheme";
-import {ColorBase} from "../Base/ColorBase/ColorBase";
-import {ColorDialogBase} from "../Base/ColorDialogBase/ColorDialogBase";
-import {ColorStaticBase} from "../Base/ColorStaticBase/ColorStaticBase";
+import {useTheme} from "@mui/material/styles";
+import {ColorBase} from "@ui-schema/material-color/Base/ColorBase";
+import {ColorDialogBase} from "@ui-schema/material-color/Base/ColorDialogBase";
+import {ColorStaticBase} from "@ui-schema/material-color/Base/ColorStaticBase";
 
 export const Color = (props) => {
     const {palette} = useTheme();

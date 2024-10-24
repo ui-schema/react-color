@@ -1,5 +1,5 @@
 const path = require('path');
-const {packer, webpack} = require('lerna-packer');
+const {packer} = require('lerna-packer');
 const {makeModulePackageJson, copyRootPackageJson, transformForEsModule} = require('lerna-packer/packer/modulePackages');
 
 // todo: once no `.d.ts` are used, remove the `copy-files` again / use lerna-packer default again
@@ -54,6 +54,7 @@ packer({
             name: '@ui-schema/material-colorful',
             root: path.resolve(__dirname, 'packages', 'material-colorful'),
             entry: path.resolve(__dirname, 'packages', 'material-colorful/src/'),
+            babelTargets: legacyBabelTargets,
         },
     },
 }, __dirname, {
