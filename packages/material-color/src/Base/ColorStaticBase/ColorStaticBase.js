@@ -1,5 +1,5 @@
 import React from 'react';
-import {convertColor} from '../transformers';
+import {convertColor} from '@ui-schema/material-color/Base/transformers';
 import merge from 'deepmerge';
 
 export const ColorStaticBase = ({

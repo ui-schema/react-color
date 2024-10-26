@@ -1,8 +1,8 @@
-import {restrictColors} from "../Base/restrictColors";
+import {restrictColors} from "@ui-schema/material-color/Base/restrictColors";
 import {SwatchesPicker} from 'react-color';
-import {ColorBase} from "../Base/ColorBase/ColorBase";
+import {ColorBase} from "@ui-schema/material-color/Base/ColorBase";
 import React from "react";
-import useTheme from "@mui/material/styles/useTheme";
+import {useTheme} from "@mui/material/styles";
 
 export const ColorSwatches = (props) => {
     const {palette} = useTheme();

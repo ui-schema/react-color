@@ -1,10 +1,10 @@
-import useTheme from "@mui/material/styles/useTheme";
-import {restrictColors} from "../Base/restrictColors";
-import {ColorBase} from "../Base/ColorBase/ColorBase";
+import {useTheme} from "@mui/material/styles";
+import {restrictColors} from "@ui-schema/material-color/Base/restrictColors";
+import {ColorBase} from "@ui-schema/material-color/Base/ColorBase";
 import {CirclePicker} from 'react-color';
 import React from "react";
 import merge from "deepmerge";
-import {ColorStaticBase} from "../Base/ColorStaticBase/ColorStaticBase";
+import {ColorStaticBase} from "@ui-schema/material-color/Base/ColorStaticBase/ColorStaticBase";
 
 const styles = ({palette, circleSpacing}) => ({
     'default': {

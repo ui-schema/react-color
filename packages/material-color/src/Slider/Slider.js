@@ -1,7 +1,7 @@
 import {SliderPicker} from 'react-color';
-import useTheme from "@mui/material/styles/useTheme";
-import {ColorBase} from "../Base/ColorBase/ColorBase";
-import {ColorStaticBase} from "../Base/ColorStaticBase/ColorStaticBase";
+import {useTheme} from "@mui/material/styles";
+import {ColorBase} from "@ui-schema/material-color/Base/ColorBase";
+import {ColorStaticBase} from "@ui-schema/material-color/Base/ColorStaticBase";
 import React from "react";
 
 export const ColorSlider = (props) => {

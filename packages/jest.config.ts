@@ -2,7 +2,7 @@ import type { Config } from '@jest/types'
 
 const packages: string[] = ['material-color', 'material-colorful']
 
-const testMatchesLint: string[] = ['material-color', 'material-colorful']
+const testMatchesLint: string[] = []
 
 packages.forEach(pkg => {
     testMatchesLint.push(...[
@@ -29,15 +29,15 @@ const base: Partial<Config.InitialOptions> = {
         'json',
         'node',
     ],
-    collectCoverage: true,
     coveragePathIgnorePatterns: [
         '(tests/.*.mock).(jsx?|tsx?|ts?|js?)$',
     ],
-    verbose: true,
 }
 
 const config: Config.InitialOptions = {
     ...base,
+    collectCoverage: true,
+    verbose: true,
     // todo: check why `transformIgnorePatterns`, combined with multi-projects/lerna 0.5.3 upgrade, throws `Reentrant plugin detected trying to load ....babel-plugin-jest-hoist/build/index.js`
     /*transformIgnorePatterns: [
         'node_modules/?!(@ui-schema)',

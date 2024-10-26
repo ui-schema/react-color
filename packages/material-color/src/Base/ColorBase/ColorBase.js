@@ -1,8 +1,8 @@
 import React from 'react';
 import InputAdornment from '@mui/material/InputAdornment';
 import Palette from '@mui/icons-material/Palette';
-import {StringRenderer} from '@ui-schema/ds-material';
-import {convertColor} from '../transformers';
+import {StringRenderer} from '@ui-schema/ds-material/Widgets/TextField';
+import {convertColor} from '@ui-schema/material-color/Base/transformers';
 import merge from 'deepmerge';
 
 /**

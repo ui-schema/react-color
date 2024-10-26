@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 export * from './Base'
 export * from './Color'
 export * from './Alpha'
@@ -13,6 +11,3 @@ export * from './Sketch'
 export * from './Slider'
 export * from './Swatches'
 export * from './Twitter'
-
-export type ColorPicker = React.ComponentType
-export type PickerContainer = React.ReactElement

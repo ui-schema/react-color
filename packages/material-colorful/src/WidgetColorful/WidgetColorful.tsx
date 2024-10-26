@@ -3,10 +3,10 @@ import { fromJSOrdered, WidgetProps, WithScalarValue, WithValue } from '@ui-sche
 import { TransTitle } from '@ui-schema/ui-schema/Translate'
 import Box from '@mui/material/Box'
 import FormLabel from '@mui/material/FormLabel'
-import useTheme from '@mui/material/styles/useTheme'
+import { useTheme } from '@mui/material/styles'
 import { AnyColor, ColorPickerBaseProps } from 'react-colorful/dist/types'
 import { ValidityHelperText } from '@ui-schema/ds-material/Component'
-import { FormHelperText } from '@mui/material'
+import FormHelperText from '@mui/material/FormHelperText'
 import { OrderedMap } from 'immutable'
 
 export type ColorfulComponent<T extends AnyColor> = React.FC<ColorPickerBaseProps<T>>
@@ -20,7 +20,7 @@ export const WidgetColorful = <T extends AnyColor, P extends WidgetProps = Widge
         storeKeys, schema, value, onChange,
         showValidity, valid, errors, required,
         ColorfulPicker,
-    }: P & (WithScalarValue | WithValue) & WidgetColorfulProps<T>
+    }: P & (WithScalarValue | WithValue) & WidgetColorfulProps<T>,
 ): React.ReactElement => {
     const handleOnChange = React.useCallback((color: AnyColor) => {
         onChange({
@@ -71,7 +71,7 @@ export const WidgetColorful = <T extends AnyColor, P extends WidgetProps = Widge
                 <FormHelperText>
                     {typeof value === 'string' ? value :
                         (value as OrderedMap<string, number>)?.map((val, k) =>
-                            <span key={k}>{k}: {val}{' '}</span>
+                            <span key={k}>{k}: {val}{' '}</span>,
                         ).valueSeq()}
                 </FormHelperText>
             </Box> : null}

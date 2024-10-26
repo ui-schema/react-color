@@ -1,8 +1,8 @@
-import useTheme from "@mui/material/styles/useTheme";
-import {ColorBase} from "../Base/ColorBase/ColorBase";
+import {useTheme} from "@mui/material/styles";
+import {ColorBase} from "@ui-schema/material-color/Base/ColorBase";
 import React from "react";
-import {styleWrapper} from "../styleWrapper";
-import {HuePicker,} from 'react-color';
+import {styleWrapper} from "@ui-schema/material-color/styleWrapper";
+import {HuePicker} from 'react-color';
 
 const WrappedHuePicker = p => {
     const theme = useTheme();

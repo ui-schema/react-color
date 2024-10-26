@@ -1,6 +1,6 @@
-import useTheme from "@mui/material/styles/useTheme";
-import {MaterialPicker,} from 'react-color';
-import {ColorBase} from "../Base/ColorBase/ColorBase";
+import {useTheme} from "@mui/material/styles";
+import {MaterialPicker} from 'react-color';
+import {ColorBase} from "@ui-schema/material-color/Base/ColorBase";
 import React from "react";
 
 export const ColorMaterial = (props) => {
