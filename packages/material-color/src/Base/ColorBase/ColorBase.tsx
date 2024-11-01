@@ -82,7 +82,6 @@ export const ColorBase = (
         {hasFocus ? <ColorCloser setHasFocus={setHasFocus}/> : null}
 
         <StringRenderer
-            inputProps={{shrink: schema.getIn(['view', 'shrink']) as boolean}}
             schema={schema}
             value={stringValue}
             onChange={onChange}
