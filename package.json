@@ -3,7 +3,6 @@
     "version": "0.0.1",
     "description": "",
     "private": true,
-    "main": "index.js",
     "scripts": {
         "start": "npm run clean-dist && npm run serve -- demo",
         "docs": "npm run serve -- docs",
@@ -25,7 +24,9 @@
         "clean-lock": "rimraf --glob packages/.+/package-lock.json",
         "bootstrap": "lerna bootstrap --force-local",
         "link": "lerna link --force-local",
-        "test": "jest -c=\"packages/jest.config.ts\"",
+        "check": "npm run lint && npm run test",
+        "lint": "cross-env NODE_ENV=test NODE_OPTIONS=\"--max-old-space-size=8192\" eslint -c=.eslintrc --ext=.tsx,.ts --max-warnings=0 'packages'",
+        "test": "jest -c=\"jest.config.ts\" --passWithNoTests",
         "tdd": "npm test -- --watch --watchman --coverage=false",
         "__release": "lerna run release --stream",
         "sloc": "node ./sloc.js",
@@ -36,20 +37,15 @@
     "devDependencies": {
         "@types/react": "^18.0",
         "@types/testing-library__jest-dom": "^5.14.0",
+        "babel-plugin-named-asset-import": "^0.3.8",
         "cross-env": "^6.0.3",
         "eslint-plugin-jsx-a11y": "^6.5.1",
         "eslint-plugin-react-hooks": "^4.3.0",
         "lerna": "^3.22.1",
-        "lerna-packer": "0.7.1",
+        "lerna-packer": "0.10.2",
         "merge-dirs": "^0.2.1",
-        "symlink-dir": "^3.1.1",
         "sloc": "^0.2.1",
         "typescript": "~5.3.3",
         "ts-node": "^10.7.0"
-    },
-    "jest-runner-eslint": {
-        "cliOptions": {
-            "maxWarnings": 0
-        }
     }
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import Helmet from 'react-helmet'
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -15,6 +16,9 @@ import { SchemaDebug } from '../components/SchemaDebug'
 
 export const PageDemoWidgetColorful: React.ComponentType = () => {
     return <>
+        <Helmet>
+            <title>react-colorful Widgets for UI-Schema</title>
+        </Helmet>
         <Container maxWidth={'md'} fixed style={{display: 'flex'}}>
             <Nav/>
             <Box mx={2} py={1} style={{flexGrow: 1}}>
