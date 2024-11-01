@@ -1,27 +1,7 @@
 const path = require('path');
 const {packer} = require('lerna-packer');
-const {makeModulePackageJson, copyRootPackageJson, transformForEsModule} = require('lerna-packer/packer/modulePackages');
-
-// todo: once no `.d.ts` are used, remove the `copy-files` again / use lerna-packer default again
-const legacyBabelTargets = [
-    {
-        distSuffix: '',
-        args: [
-            '--env-name', 'cjs', '--no-comments', '--copy-files',
-            '--extensions', '.ts', '--extensions', '.tsx', '--extensions', '.js', '--extensions', '.jsx',
-            '--ignore', '**/*.d.ts',
-            '--ignore', '**/*.test.tsx', '--ignore', '**/*.test.ts', '--ignore', '**/*.test.js',
-        ],
-    },
-    {
-        distSuffix: '/esm', args: [
-            '--no-comments',
-            '--extensions', '.ts', '--extensions', '.tsx', '--extensions', '.js', '--extensions', '.jsx',
-            '--ignore', '**/*.d.ts',
-            '--ignore', '**/*.test.tsx', '--ignore', '**/*.test.ts', '--ignore', '**/*.test.js',
-        ],
-    },
-]
+const {babelTargetsLegacyCjsFirst} = require('lerna-packer/packer/babelEsModules');
+const {makeModulePackageJson, copyRootPackageJson, transformerForLegacyCjsFirst} = require('lerna-packer/packer/modulePackages');
 
 packer({
     apps: {
@@ -39,6 +19,7 @@ packer({
                 },
             },
             publicPath: '/',
+            aliasPackagesBuild: 'production',
         },
     },
     packages: {
@@ -48,19 +29,19 @@ packer({
             name: '@ui-schema/material-color',
             root: path.resolve(__dirname, 'packages', 'material-color'),
             entry: path.resolve(__dirname, 'packages', 'material-color/src/'),
-            babelTargets: legacyBabelTargets,
+            babelTargets: babelTargetsLegacyCjsFirst,
         },
         materialColorful: {
             name: '@ui-schema/material-colorful',
             root: path.resolve(__dirname, 'packages', 'material-colorful'),
             entry: path.resolve(__dirname, 'packages', 'material-colorful/src/'),
-            babelTargets: legacyBabelTargets,
+            babelTargets: babelTargetsLegacyCjsFirst,
         },
     },
 }, __dirname, {
     afterEsModules: (packages, pathBuild) => {
         return Promise.all([
-            makeModulePackageJson(transformForEsModule)(packages, pathBuild),
+            makeModulePackageJson(transformerForLegacyCjsFirst)(packages, pathBuild),
             copyRootPackageJson()(packages, pathBuild),
         ])
     },
