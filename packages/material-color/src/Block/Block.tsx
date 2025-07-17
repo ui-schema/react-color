@@ -1,11 +1,10 @@
 import { useTheme } from '@mui/material/styles'
 import { restrictColors } from '@ui-schema/material-color/Base/restrictColors'
 import { ColorBase, ColorBaseProps } from '@ui-schema/material-color/Base/ColorBase'
-import { WithScalarValue } from '@ui-schema/ui-schema'
 import React from 'react'
 import { BlockPicker } from 'react-color'
 
-export const ColorBlock = ({hideInput = true, ...props}: Omit<ColorBaseProps, 'ColorPicker' | 'styles'> & WithScalarValue & { hideInput?: boolean }) => {
+export const ColorBlock = ({hideInput = true, ...props}: Omit<ColorBaseProps, 'ColorPicker' | 'styles'> & { hideInput?: boolean }) => {
     const {palette, shape} = useTheme()
     const styles = {
         'default': {

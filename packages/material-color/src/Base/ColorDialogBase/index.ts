@@ -1,1 +1,1 @@
-export * from './ColorDialogBase'
+export * from './ColorDialogBase.js'

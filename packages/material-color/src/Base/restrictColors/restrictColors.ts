@@ -1,7 +1,7 @@
-import { StoreSchemaType } from '@ui-schema/ui-schema/CommonTypings'
+import { SomeSchema } from '@ui-schema/ui-schema/CommonTypings'
 import { List } from 'immutable'
 
-const restrictColors = (pickerProps: any, schema: StoreSchemaType, nestedArray?: boolean): void => {
+export const restrictColors = (pickerProps: any, schema: SomeSchema, nestedArray?: boolean): void => {
     // todo: nested array should support grouping, needed only for SwatchesPicker
     if(schema.get('enum')) {
         pickerProps['colors'] = schema.get('enum').toArray()
@@ -11,5 +11,3 @@ const restrictColors = (pickerProps: any, schema: StoreSchemaType, nestedArray?:
         if(nestedArray) pickerProps['colors'] = [pickerProps['colors']]
     }
 }
-
-export { restrictColors }

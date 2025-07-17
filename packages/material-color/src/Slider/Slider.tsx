@@ -1,11 +1,10 @@
-import { WithScalarValue } from '@ui-schema/ui-schema'
 import { SliderPicker } from 'react-color'
 import { useTheme } from '@mui/material/styles'
 import { ColorBase, ColorBaseProps } from '@ui-schema/material-color/Base/ColorBase'
 import { ColorStaticBase, ColorStaticBaseProps } from '@ui-schema/material-color/Base/ColorStaticBase'
 import React from 'react'
 
-export const ColorSlider = (props: Omit<ColorBaseProps, 'ColorPicker' | 'styles'> & WithScalarValue) => {
+export const ColorSlider = (props: Omit<ColorBaseProps, 'ColorPicker' | 'styles'>) => {
     const {palette, spacing} = useTheme()
     const styles = {
         'default': {
@@ -20,7 +19,7 @@ export const ColorSlider = (props: Omit<ColorBaseProps, 'ColorPicker' | 'styles'
     return <ColorBase {...props} ColorPicker={SliderPicker} styles={styles}/>
 }
 
-export const ColorSliderStatic = (props: Omit<ColorStaticBaseProps, 'ColorPicker' | 'styles'> & WithScalarValue) => {
+export const ColorSliderStatic = (props: Omit<ColorStaticBaseProps, 'ColorPicker' | 'styles'>) => {
     const {palette, spacing} = useTheme()
     const styles = {
         'default': {

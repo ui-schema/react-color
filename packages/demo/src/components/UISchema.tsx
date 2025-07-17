@@ -1,10 +1,9 @@
+import { baseComponents, bindingExtended, MuiBinding, SchemaGridHandler, typeWidgets } from '@ui-schema/ds-material'
+import { requiredPlugin, validatorPlugin } from '@ui-schema/json-schema'
+import { DefaultHandler, ValidityReporter } from '@ui-schema/react'
+import { schemaPluginsAdapterBuilder } from '@ui-schema/react/SchemaPluginsAdapter'
+import { WidgetProps } from '@ui-schema/react/Widget'
 import React from 'react'
-import {
-    extractValue, memo,
-    WidgetProps,
-    WidgetsBindingFactory, WithScalarValue, WithValue,
-} from '@ui-schema/ui-schema'
-import { MuiWidgetsBindingCustom, MuiWidgetsBindingTypes, widgets } from '@ui-schema/ds-material/widgetsBinding'
 import {
     Color, ColorDialog,
     ColorSwatches,
@@ -24,12 +23,10 @@ import {
     RgbaStringColorPicker,
 } from 'react-colorful'
 
-export type CustomWidgetsBinding = WidgetsBindingFactory<{}, MuiWidgetsBindingTypes<{}>, MuiWidgetsBindingCustom<{}>>
-
-const ColorfulHex: React.FC<WidgetProps & WithScalarValue> = (props) => <WidgetColorful ColorfulPicker={HexColorPicker} {...props}/>
-const ColorfulHslaBase: React.FC<WidgetProps & WithValue> = (props) => <WidgetColorful ColorfulPicker={HslaColorPicker} {...props}/>
-const ColorfulHsla = extractValue(memo(ColorfulHslaBase))
-const ColorfulRgbaBase: React.FC<WidgetProps & (WithScalarValue | WithValue)> =
+const ColorfulHex: React.FC<WidgetProps> = (props) => <WidgetColorful ColorfulPicker={HexColorPicker} {...props}/>
+const ColorfulHslaBase: React.FC<WidgetProps> = (props) => <WidgetColorful ColorfulPicker={HslaColorPicker} {...props}/>
+// const ColorfulHsla = extractValue(memo(ColorfulHslaBase))
+const ColorfulRgbaBase: React.FC<WidgetProps> =
     (props) =>
         <WidgetColorful
             // todo: find a way to safely type the inner `ColorfulPicker`, as this is not incorrect per-se,
@@ -38,13 +35,16 @@ const ColorfulRgbaBase: React.FC<WidgetProps & (WithScalarValue | WithValue)> =
             ColorfulPicker={props.schema.get('type') === 'string' ? RgbaStringColorPicker : RgbaColorPicker}
             {...props}
         />
-const ColorfulRgba = extractValue(memo(ColorfulRgbaBase))
+// const ColorfulRgba = extractValue(memo(ColorfulRgbaBase))
 
-export const customWidgets: CustomWidgetsBinding = {
-    ...widgets,
-    types: widgets.types,
-    custom: {
-        ...widgets.custom,
+export const customWidgets: MuiBinding = {
+    ...baseComponents,
+
+    // Widget mapping by schema type or custom ID.
+    widgets: {
+        ...typeWidgets,
+        ...bindingExtended,
+
         Color,
         ColorDialog,
         ColorStatic,
@@ -64,7 +64,17 @@ export const customWidgets: CustomWidgetsBinding = {
         ColorSketchStatic,
         ColorSketchDialog,
         Colorful: ColorfulHex,
-        ColorfulHsla: ColorfulHsla,
-        ColorfulRgba: ColorfulRgba,
+        ColorfulHsla: ColorfulHslaBase,
+        ColorfulRgba: ColorfulRgbaBase,
     },
+
+    widgetPlugins: [
+        DefaultHandler,
+        schemaPluginsAdapterBuilder([
+            validatorPlugin,
+            requiredPlugin,
+        ]),
+        SchemaGridHandler,
+        ValidityReporter,
+    ],
 }

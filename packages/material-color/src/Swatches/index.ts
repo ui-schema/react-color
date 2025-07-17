@@ -1,1 +1,1 @@
-export * from './Swatches'
+export * from './Swatches.js'

@@ -1,11 +1,10 @@
 import React from 'react'
 import { restrictColors } from '@ui-schema/material-color/Base/restrictColors'
 import { ColorBase, ColorBaseProps } from '@ui-schema/material-color/Base/ColorBase'
-import { WithScalarValue } from '@ui-schema/ui-schema'
-import merge from 'deepmerge'
 import { useTheme } from '@mui/material/styles'
 import { TwitterPicker } from 'react-color'
 import { ColorStaticBase, ColorStaticBaseProps } from '@ui-schema/material-color/Base/ColorStaticBase'
+import { mergeStyles } from '../mergeStyles/index.js'
 
 const styles = ({palette, value}) => ({
     'default': {
@@ -36,7 +35,7 @@ const styles = ({palette, value}) => ({
     },
 })
 
-const ColorTwitter = (props: Omit<ColorBaseProps, 'ColorPicker' | 'styles'> & WithScalarValue) => {
+const ColorTwitter = (props: Omit<ColorBaseProps, 'ColorPicker' | 'styles'>) => {
     const {palette} = useTheme()
 
     const pickerProps = props.pickerProps || {}
@@ -49,7 +48,7 @@ const ColorTwitter = (props: Omit<ColorBaseProps, 'ColorPicker' | 'styles'> & Wi
     />
 }
 
-const stylesStatic = ({palette, value}) => merge(styles({palette, value}), {
+const stylesStatic = ({palette, value}) => mergeStyles(styles({palette, value}), {
     'default': {
         card: {
             width: '100%',
@@ -64,7 +63,7 @@ const stylesStatic = ({palette, value}) => merge(styles({palette, value}), {
     },
 })
 
-const ColorTwitterStatic = (props: Omit<ColorStaticBaseProps, 'ColorPicker' | 'styles'> & WithScalarValue) => {
+const ColorTwitterStatic = (props: Omit<ColorStaticBaseProps, 'ColorPicker' | 'styles'>) => {
     const {palette} = useTheme()
 
     const pickerProps = {triangle: 'hide'}

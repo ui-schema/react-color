@@ -13,24 +13,25 @@
         "@emotion/react": "^11.9.0",
         "@emotion/styled": "^11.8.1",
         "@mui/lab": "^5.0.0-alpha.45",
-        "@ui-schema/dictionary": "~0.0.13",
-        "@ui-schema/ds-material": "~0.4.3",
-        "@ui-schema/material-color": "~0.4.3",
-        "@ui-schema/material-colorful": "~0.0.4",
-        "@ui-schema/ui-schema": "~0.4.7",
+        "@ui-schema/dictionary": "~0.1.0-alpha.0",
+        "@ui-schema/ds-material": "~0.5.0-alpha.0",
+        "@ui-schema/react": "~0.5.0-alpha.0",
+        "@ui-schema/ui-schema": "~0.5.0-alpha.0",
+        "@ui-schema/json-schema": "~0.5.0-alpha.0",
+        "@ui-schema/json-pointer": "~0.5.0-alpha.0",
+        "@ui-schema/material-color": "~0.5.0-alpha.0",
+        "@ui-schema/material-colorful": "~0.5.0-alpha.0",
         "immutable": "^5.0.0",
-        "react": "^18.0",
+        "react": "^19.0",
         "react-color": "^2.19.3",
         "react-colorful": "^5.0.0",
-        "react-dom": "^18.0",
-        "react-helmet": "^6.1.0",
+        "react-dom": "^19.0",
         "react-immutable-editor": "^0.6.1",
         "react-router": "^6.3.0",
         "react-router-dom": "^6.3.0",
         "styled-components": "^5.0.0"
     },
     "devDependencies": {
-        "@types/react": "^18.0",
-        "@types/react-helmet": "^6.1.11"
+        "@types/react": "^19.0"
     }
 }

@@ -1,1 +1,1 @@
-export * from './restrictColors'
+export * from './restrictColors.js'
