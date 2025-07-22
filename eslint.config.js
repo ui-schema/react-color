@@ -241,6 +241,8 @@ export default defineConfig([
         languageOptions: {
             globals: {
                 ...globals.node,
+                ...globals.es5,
+                ...globals.es2021,
             },
         },
     },

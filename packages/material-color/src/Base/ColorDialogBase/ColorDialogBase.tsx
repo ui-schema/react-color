@@ -1,4 +1,5 @@
-import React, { PropsWithChildren } from 'react'
+import * as React from 'react'
+import type { PropsWithChildren } from 'react'
 import Dialog from '@mui/material/Dialog'
 import Button from '@mui/material/Button'
 import { ColorBase, ColorBaseProps, PickerContainer } from '@ui-schema/material-color/Base/ColorBase'

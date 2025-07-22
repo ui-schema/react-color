@@ -2,7 +2,7 @@ import { useTheme } from '@mui/material/styles'
 import { restrictColors } from '@ui-schema/material-color/Base/restrictColors'
 import { ColorBase, ColorBaseProps } from '@ui-schema/material-color/Base/ColorBase'
 import { CirclePicker } from 'react-color'
-import React from 'react'
+import * as React from 'react'
 import { ColorStaticBase, ColorStaticBaseProps } from '@ui-schema/material-color/Base/ColorStaticBase'
 import { mergeStyles } from '../mergeStyles/index.js'
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { restrictColors } from '@ui-schema/material-color/Base/restrictColors'
 import { ColorBase, ColorBaseProps } from '@ui-schema/material-color/Base/ColorBase'
 import { useTheme } from '@mui/material/styles'

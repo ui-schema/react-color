@@ -1,5 +1,5 @@
 import { fromJSOrdered } from '@ui-schema/ui-schema/createMap'
-import React from 'react'
+import * as React from 'react'
 import { WidgetProps } from '@ui-schema/react/Widget'
 import { TranslateTitle } from '@ui-schema/react/TranslateTitle'
 import Box from '@mui/material/Box'

@@ -1,7 +1,7 @@
 import { restrictColors } from '@ui-schema/material-color/Base/restrictColors'
 import { SwatchesPicker } from 'react-color'
 import { ColorBase, ColorBaseProps } from '@ui-schema/material-color/Base/ColorBase'
-import React from 'react'
+import * as React from 'react'
 import { useTheme } from '@mui/material/styles'
 
 export const ColorSwatches = (props: Omit<ColorBaseProps, 'ColorPicker' | 'styles'>) => {

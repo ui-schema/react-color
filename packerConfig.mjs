@@ -8,35 +8,35 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
-const babelTargetsEsmCjs = [
-    {
-        distSuffix: '',
-        args: [
-            '--env-name', 'cjs', '--no-comments', // '--copy-files', '--no-copy-ignored',
-            // note: even with defined extension, the extensions of `import` are still `.js`
-            //       which would break relative imports, as they then import ESM instead of the CJS file;
-            //       thus added `babel-plugin-replace-import-extension` for the CJS environment
-            //       it's not validated how it behaves for external imports for third-party modules,
-            //       which can be problematic in other projects,
-            //       here `import` to 3rd party modules are done purely by package name
-            '--out-file-extension', '.cjs',
-            '--extensions', '.ts', '--extensions', '.tsx', '--extensions', '.js', '--extensions', '.jsx',
-            '--ignore', '**/*.d.ts',
-            '--ignore', '**/*.test.tsx', '--ignore', '**/*.test.ts', '--ignore', '**/*.test.js',
-            '--ignore', '**/*.mock.ts', '--ignore', '**/*.mock.js',
-        ],
-    },
-    {
-        distSuffix: '',
-        args: [
-            '--no-comments',
-            '--extensions', '.ts', '--extensions', '.tsx', '--extensions', '.js', '--extensions', '.jsx',
-            '--ignore', '**/*.d.ts',
-            '--ignore', '**/*.test.tsx', '--ignore', '**/*.test.ts', '--ignore', '**/*.test.js',
-            '--ignore', '**/*.mock.ts', '--ignore', '**/*.mock.js',
-        ],
-    },
-]
+// const babelTargetsEsmCjs = [
+//     {
+//         distSuffix: '',
+//         args: [
+//             '--env-name', 'cjs', '--no-comments', // '--copy-files', '--no-copy-ignored',
+//             // note: even with defined extension, the extensions of `import` are still `.js`
+//             //       which would break relative imports, as they then import ESM instead of the CJS file;
+//             //       thus added `babel-plugin-replace-import-extension` for the CJS environment
+//             //       it's not validated how it behaves for external imports for third-party modules,
+//             //       which can be problematic in other projects,
+//             //       here `import` to 3rd party modules are done purely by package name
+//             '--out-file-extension', '.cjs',
+//             '--extensions', '.ts', '--extensions', '.tsx', '--extensions', '.js', '--extensions', '.jsx',
+//             '--ignore', '**/*.d.ts',
+//             '--ignore', '**/*.test.tsx', '--ignore', '**/*.test.ts', '--ignore', '**/*.test.js',
+//             '--ignore', '**/*.mock.ts', '--ignore', '**/*.mock.js',
+//         ],
+//     },
+//     {
+//         distSuffix: '',
+//         args: [
+//             '--no-comments',
+//             '--extensions', '.ts', '--extensions', '.tsx', '--extensions', '.js', '--extensions', '.jsx',
+//             '--ignore', '**/*.d.ts',
+//             '--ignore', '**/*.test.tsx', '--ignore', '**/*.test.ts', '--ignore', '**/*.test.js',
+//             '--ignore', '**/*.mock.ts', '--ignore', '**/*.mock.js',
+//         ],
+//     },
+// ]
 
 const babelTargetsCjsEsm = [
     {
@@ -96,13 +96,13 @@ packer({
             name: '@ui-schema/material-color',
             root: path.resolve(__dirname, 'packages', 'material-color'),
             entry: path.resolve(__dirname, 'packages', 'material-color/src/'),
-            babelTargets: babelTargetsEsmCjs,
+            babelTargets: babelTargetsCjsEsm,
         },
         materialColorful: {
             name: '@ui-schema/material-colorful',
             root: path.resolve(__dirname, 'packages', 'material-colorful'),
             entry: path.resolve(__dirname, 'packages', 'material-colorful/src/'),
-            babelTargets: babelTargetsEsmCjs,
+            babelTargets: babelTargetsCjsEsm,
         },
     },
 }, __dirname, {
@@ -114,12 +114,18 @@ packer({
             '@emotion',
         ],
     },
-    afterEsModules: (packages, pathBuild) => {
+    afterEsModules: (packages, pathBuild, isServing) => {
+        if(isServing) return
         return Promise.all([
-            // no longer needed for strict ESM
-            // makeModulePackageJson(transformerForEsmCjs)(packages, pathBuild),
-            copyRootPackageJson()(packages, pathBuild),
-        ]).then(() => undefined)
+            copyRootPackageJson(({packageJson}) => {
+                packageJson = {...packageJson}
+                delete packageJson.type
+                return packageJson
+            })(packages, pathBuild),
+        ]).then(() => undefined).catch((e) => {
+            console.error('ERROR after-es-mod', e)
+            return Promise.reject(e)
+        })
     },
 })
     .then(([execs, elapsed]) => {

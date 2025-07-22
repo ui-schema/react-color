@@ -1,7 +1,7 @@
 import { useTheme } from '@mui/material/styles'
 import { restrictColors } from '@ui-schema/material-color/Base/restrictColors'
 import { ColorBase, ColorBaseProps } from '@ui-schema/material-color/Base/ColorBase'
-import React from 'react'
+import * as React from 'react'
 import { BlockPicker } from 'react-color'
 
 export const ColorBlock = ({hideInput = true, ...props}: Omit<ColorBaseProps, 'ColorPicker' | 'styles'> & { hideInput?: boolean }) => {

@@ -1,6 +1,6 @@
 import React from 'react'
 import Container from '@mui/material/Container'
-import { Nav } from '../components/Nav'
+import { Nav } from '../components/Nav.js'
 
 export const PageHome: React.ComponentType = () => {
     return <>

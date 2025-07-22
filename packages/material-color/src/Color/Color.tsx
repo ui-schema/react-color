@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { ChromePicker } from 'react-color'
 import { useTheme } from '@mui/material/styles'
 import { ColorBase, ColorBaseProps } from '@ui-schema/material-color/Base/ColorBase'

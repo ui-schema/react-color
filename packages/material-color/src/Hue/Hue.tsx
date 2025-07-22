@@ -1,6 +1,6 @@
 import { useTheme } from '@mui/material/styles'
 import { ColorBase, ColorBaseProps } from '@ui-schema/material-color/Base/ColorBase'
-import React from 'react'
+import * as React from 'react'
 import { styleWrapper } from '@ui-schema/material-color/styleWrapper'
 import { HuePicker } from 'react-color'
 

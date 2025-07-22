@@ -1,6 +1,6 @@
 import { ColorBaseProps } from '@ui-schema/material-color/Base/ColorBase'
 import { WidgetProps } from '@ui-schema/react/Widget'
-import React from 'react'
+import * as React from 'react'
 import { convertColor } from '@ui-schema/material-color/Base/transformers'
 
 export interface ColorStaticBaseProps extends WidgetProps {

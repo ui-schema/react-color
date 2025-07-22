@@ -1,7 +1,7 @@
 import { List } from 'immutable'
 import { SketchPicker } from 'react-color'
 import { useTheme } from '@mui/material/styles'
-import React from 'react'
+import * as React from 'react'
 import { ColorBase, ColorBaseProps } from '@ui-schema/material-color/Base/ColorBase'
 import { ColorStaticBase, ColorStaticBaseProps } from '@ui-schema/material-color/Base/ColorStaticBase'
 import { ColorDialogBase, ColorDialogBaseProps } from '@ui-schema/material-color/Base/ColorDialogBase'

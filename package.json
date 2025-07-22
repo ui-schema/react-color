@@ -3,7 +3,6 @@
     "version": "0.0.1",
     "description": "",
     "private": true,
-    "type": "module",
     "scripts": {
         "start": "npm run clean-dist && npm run serve -- demo",
         "docs": "npm run serve -- docs",
@@ -14,6 +13,7 @@
         "build-all": "cross-env NODE_ENV=production CI=true node packerConfig.mjs --build --babel --webpack",
         "build-babel": "cross-env NODE_ENV=production CI=true node packerConfig.mjs --build --babel",
         "build-webpack": "cross-env NODE_ENV=production CI=true node packerConfig.mjs --build --webpack",
+        "postbuild": "cp -r ./packages/material-color/build/ ./dist/material-color && cp -r ./packages/material-colorful/build/ ./dist/material-colorful",
         "dtsgen": "lerna run dtsgen",
         "tscheck": "lerna run tscheck",
         "profile": "cross-env NODE_OPTIONS='$NODE_OPTIONS --max-old-space-size=4096' NODE_ENV=production node packerConfig.mjs --build --profile",

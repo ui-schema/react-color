@@ -2,7 +2,7 @@ import { SliderPicker } from 'react-color'
 import { useTheme } from '@mui/material/styles'
 import { ColorBase, ColorBaseProps } from '@ui-schema/material-color/Base/ColorBase'
 import { ColorStaticBase, ColorStaticBaseProps } from '@ui-schema/material-color/Base/ColorStaticBase'
-import React from 'react'
+import * as React from 'react'
 
 export const ColorSlider = (props: Omit<ColorBaseProps, 'ColorPicker' | 'styles'>) => {
     const {palette, spacing} = useTheme()

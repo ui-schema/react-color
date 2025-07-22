@@ -1,5 +1,5 @@
 import { WidgetProps } from '@ui-schema/react/Widget'
-import React from 'react'
+import * as React from 'react'
 import InputAdornment from '@mui/material/InputAdornment'
 import Palette from '@mui/icons-material/Palette'
 import { StringRenderer } from '@ui-schema/ds-material/Widgets/TextField'
