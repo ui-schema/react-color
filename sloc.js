@@ -1,11 +1,14 @@
-const fs = require('fs');
-const path = require('path');
-const sloc = require('sloc');
+import fs from 'node:fs';
+import path from 'node:path';
+import sloc from 'sloc';
+import url from 'node:url';
+
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url))
 
 const include = [
     path.resolve(__dirname, 'packages', 'demo/src'),
-    path.resolve(__dirname, 'packages', 'kit-codemirror/src'),
-    path.resolve(__dirname, 'packages', 'material-code/src'),
+    path.resolve(__dirname, 'packages', 'material-color/src'),
+    path.resolve(__dirname, 'packages', 'material-colorful/src'),
 ];
 
 let scannner = function(dir, root, fileList = []) {

@@ -1,1 +1,1 @@
-export * from './ColorStaticBase'
+export * from './ColorStaticBase.js'

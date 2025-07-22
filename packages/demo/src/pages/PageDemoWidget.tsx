@@ -1,14 +1,12 @@
 import React from 'react'
-import Helmet from 'react-helmet'
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { Nav } from '../components/Nav'
-import {
-    createOrderedMap, createStore, injectPluginStack, JsonSchema,
-    onChangeHandler, storeUpdater,
-    UIStoreProvider,
-} from '@ui-schema/ui-schema'
+import { createOrderedMap } from '@ui-schema/ui-schema/createMap'
+import { WidgetEngine } from '@ui-schema/react/WidgetEngine'
+import { storeUpdater } from '@ui-schema/react/storeUpdater'
+import { createStore, onChangeHandler, UIStoreProvider } from '@ui-schema/react/UIStore'
 import { OrderedMap } from 'immutable'
 import { GridContainer } from '@ui-schema/ds-material/GridContainer'
 import Link from '@mui/material/Link'
@@ -16,9 +14,9 @@ import { SchemaDebug } from '../components/SchemaDebug'
 
 export const PageDemoWidget: React.ComponentType = () => {
     return <>
-        <Helmet>
+        <>
             <title>react-color Widgets for UI-Schema</title>
-        </Helmet>
+        </>
         <Container maxWidth={'md'} fixed style={{display: 'flex'}}>
             <Nav/>
             <Box mx={2} py={1} style={{flexGrow: 1}}>
@@ -286,9 +284,8 @@ const schema = createOrderedMap({
         },
     },
     required: ['color_2'],
-} as JsonSchema)
+})
 
-const GridStack = injectPluginStack(GridContainer)
 const DemoComponent = () => {
     const showValidity = true
     const [store, setStore] = React.useState(() => createStore(OrderedMap({})))
@@ -304,11 +301,12 @@ const DemoComponent = () => {
             onChange={onChange}
             showValidity={showValidity}
         >
-            <GridStack
-                schema={schema}
-                showValidity={showValidity}
-                isRoot
-            />
+            <GridContainer>
+                <WidgetEngine
+                    schema={schema}
+                    isRoot
+                />
+            </GridContainer>
             <Box mt={2}>
                 <Typography variant={'subtitle1'} gutterBottom>Store & Schema Debug</Typography>
                 <SchemaDebug schema={schema}/>

@@ -1,1 +1,1 @@
-export * from './ColorBase'
+export * from './ColorBase.js'

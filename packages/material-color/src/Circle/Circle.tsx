@@ -1,11 +1,10 @@
 import { useTheme } from '@mui/material/styles'
 import { restrictColors } from '@ui-schema/material-color/Base/restrictColors'
 import { ColorBase, ColorBaseProps } from '@ui-schema/material-color/Base/ColorBase'
-import { WithScalarValue } from '@ui-schema/ui-schema'
 import { CirclePicker } from 'react-color'
-import React from 'react'
-import merge from 'deepmerge'
+import * as React from 'react'
 import { ColorStaticBase, ColorStaticBaseProps } from '@ui-schema/material-color/Base/ColorStaticBase'
+import { mergeStyles } from '../mergeStyles/index.js'
 
 const styles = ({palette, circleSpacing}) => ({
     'default': {
@@ -27,7 +26,7 @@ export interface ColorCircleProps extends ColorBaseProps {
     circleSize?: number
 }
 
-export const ColorCircle = ({circleSpacing = 12, circleSize = 28, ...props}: Omit<ColorCircleProps, 'ColorPicker' | 'styles'> & WithScalarValue) => {
+export const ColorCircle = ({circleSpacing = 12, circleSize = 28, ...props}: Omit<ColorCircleProps, 'ColorPicker' | 'styles'>) => {
     const {palette} = useTheme()
 
     const pickerProps = {circleSpacing, circleSize}
@@ -40,7 +39,7 @@ export const ColorCircle = ({circleSpacing = 12, circleSize = 28, ...props}: Omi
     />
 }
 
-const stylesStatic = ({palette, circleSpacing}) => merge(styles({palette, circleSpacing}), {
+const stylesStatic = ({palette, circleSpacing}) => mergeStyles(styles({palette, circleSpacing}), {
     'default': {
         card: {
             boxShadow: 0,
@@ -54,7 +53,7 @@ export interface ColorCircleStaticProps extends ColorStaticBaseProps {
     circleSize?: number
 }
 
-export const ColorCircleStatic = ({circleSpacing = 12, circleSize = 28, ...props}: Omit<ColorCircleStaticProps, 'ColorPicker' | 'styles'> & WithScalarValue) => {
+export const ColorCircleStatic = ({circleSpacing = 12, circleSize = 28, ...props}: Omit<ColorCircleStaticProps, 'ColorPicker' | 'styles'>) => {
     const {palette} = useTheme()
 
     const pickerProps = {circleSpacing}

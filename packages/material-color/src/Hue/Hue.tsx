@@ -1,7 +1,6 @@
 import { useTheme } from '@mui/material/styles'
 import { ColorBase, ColorBaseProps } from '@ui-schema/material-color/Base/ColorBase'
-import { WithScalarValue } from '@ui-schema/ui-schema'
-import React from 'react'
+import * as React from 'react'
 import { styleWrapper } from '@ui-schema/material-color/styleWrapper'
 import { HuePicker } from 'react-color'
 
@@ -10,7 +9,7 @@ const WrappedHuePicker = p => {
     return <div style={styleWrapper(theme)}><HuePicker {...p}/></div>
 }
 
-export const ColorHue = (props: Omit<ColorBaseProps, 'ColorPicker' | 'styles'> & WithScalarValue) => {
+export const ColorHue = (props: Omit<ColorBaseProps, 'ColorPicker' | 'styles'>) => {
     const styles = {
         'default': {
             picker: {width: '100%'},

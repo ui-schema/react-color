@@ -1,12 +1,9 @@
-import { MuiWidgetBinding } from '@ui-schema/ds-material/widgetsBinding'
 import { ColorBaseProps } from '@ui-schema/material-color/Base/ColorBase'
-import { WithScalarValue } from '@ui-schema/ui-schema'
-import { WidgetProps } from '@ui-schema/ui-schema/Widget'
-import React from 'react'
+import { WidgetProps } from '@ui-schema/react/Widget'
+import * as React from 'react'
 import { convertColor } from '@ui-schema/material-color/Base/transformers'
-import merge from 'deepmerge'
 
-export interface ColorStaticBaseProps extends WidgetProps<MuiWidgetBinding<{}>> {
+export interface ColorStaticBaseProps extends WidgetProps {
     ColorPicker: ColorBaseProps['ColorPicker']
     styles?: ColorBaseProps['styles']
     pickerProps?: object
@@ -17,9 +14,9 @@ export const ColorStaticBase = (
         storeKeys, schema, value, onChange, ColorPicker,
         styles: customStyles = {}, required,
         pickerProps = {},
-    }: ColorStaticBaseProps & WithScalarValue,
+    }: ColorStaticBaseProps,
 ) => {
-    const styles = merge({}, customStyles)
+    const styles = customStyles
     const format = schema.get('format')
 
     return <ColorPicker

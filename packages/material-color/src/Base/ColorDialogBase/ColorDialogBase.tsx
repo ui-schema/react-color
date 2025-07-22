@@ -1,9 +1,9 @@
-import { WithScalarValue } from '@ui-schema/ui-schema'
-import React, { PropsWithChildren } from 'react'
+import * as React from 'react'
+import type { PropsWithChildren } from 'react'
 import Dialog from '@mui/material/Dialog'
 import Button from '@mui/material/Button'
 import { ColorBase, ColorBaseProps, PickerContainer } from '@ui-schema/material-color/Base/ColorBase'
-import { Trans } from '@ui-schema/ui-schema/Translate/Trans'
+import { Translate } from '@ui-schema/react/Translate'
 
 export interface ColorDialogBaseProps extends ColorBaseProps {
     hasFocus?: boolean
@@ -18,11 +18,11 @@ const ColorDialogDialog: PickerContainer = ({hasFocus, setFocus, children}) => <
     open={hasFocus} onClose={() => setFocus(false)}
 >
     {children}
-    <Button onClick={() => setFocus(false)}><Trans text={'labels.ok'}/></Button>
+    <Button onClick={() => setFocus(false)}><Translate text={'labels.ok'}/></Button>
 </Dialog>
 
-// eslint-disable-next-line deprecation/deprecation
-export const ColorDialogBase = ({ColorPicker, PickerContainer, CustomDialog, ...props}: PropsWithChildren<ColorDialogBaseProps> & WithScalarValue) => (
+// eslint-disable-next-line @typescript-eslint/no-deprecated
+export const ColorDialogBase = ({ColorPicker, PickerContainer, CustomDialog, ...props}: PropsWithChildren<ColorDialogBaseProps>) => (
     <ColorBase
         {...props}
         PickerContainer={PickerContainer || CustomDialog || ColorDialogDialog}

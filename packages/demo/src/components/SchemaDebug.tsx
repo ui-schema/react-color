@@ -1,8 +1,9 @@
 import Typography from '@mui/material/Typography'
-import { useUIStore } from '@ui-schema/ui-schema/UIStore'
+import { useUIStore } from '@ui-schema/react/UIStore'
+import { SomeSchema } from '@ui-schema/ui-schema/CommonTypings'
 import React, { ReactNode } from 'react'
 import { List } from 'immutable'
-import { StoreSchemaType, useUIStoreActions } from '@ui-schema/ui-schema'
+import { useUIStoreActions } from '@ui-schema/react/UIStoreActions'
 import { useTheme } from '@mui/material/styles'
 import { ImmutableEditor, themeMaterial } from 'react-immutable-editor'
 import Paper from '@mui/material/Paper'
@@ -30,9 +31,9 @@ const StyledEditor: React.FC<{
             data={data}
             onChange={onChange}
             getVal={getVal}
+            invertTheme={theme.palette.mode === 'dark'}
             theme={{
                 ...themeMaterial,
-                type: theme.palette.mode,
                 base00: theme.palette.background.paper,
                 base0D: theme.palette.text.secondary,
                 base0B: theme.palette.text.primary,
@@ -41,7 +42,7 @@ const StyledEditor: React.FC<{
     </Paper>
 }
 
-export const SchemaDebug: React.FC<{ schema: StoreSchemaType }> = ({schema}) => {
+export const SchemaDebug: React.FC<{ schema: SomeSchema }> = ({schema}) => {
     const {store} = useUIStore()
     const {onChange} = useUIStoreActions()
 

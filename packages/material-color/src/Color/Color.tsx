@@ -1,13 +1,12 @@
-import { WithScalarValue } from '@ui-schema/ui-schema'
-import React from 'react'
+import * as React from 'react'
 import { ChromePicker } from 'react-color'
-import merge from 'deepmerge'
 import { useTheme } from '@mui/material/styles'
 import { ColorBase, ColorBaseProps } from '@ui-schema/material-color/Base/ColorBase'
 import { ColorDialogBase, ColorDialogBaseProps } from '@ui-schema/material-color/Base/ColorDialogBase'
 import { ColorStaticBase, ColorStaticBaseProps } from '@ui-schema/material-color/Base/ColorStaticBase'
+import { mergeStyles } from '../mergeStyles/index.js'
 
-export const Color = (props: Omit<ColorBaseProps, 'ColorPicker' | 'styles'> & WithScalarValue) => {
+export const Color = (props: Omit<ColorBaseProps, 'ColorPicker' | 'styles'>) => {
     const {palette} = useTheme()
     return <ColorBase {...props} ColorPicker={ChromePicker} styles={chromeStyles(palette)}/>
 }
@@ -23,7 +22,7 @@ const chromeStyles = palette => ({
     },
 })
 
-const stylesDialog = palette => merge({
+const stylesDialog = palette => mergeStyles({
     'default': {
         picker: {
             boxShadow: '0',
@@ -31,12 +30,12 @@ const stylesDialog = palette => merge({
     },
 }, chromeStyles(palette))
 
-export const ColorDialog = (props: Omit<ColorDialogBaseProps, 'ColorPicker' | 'styles'> & WithScalarValue) => {
+export const ColorDialog = (props: Omit<ColorDialogBaseProps, 'ColorPicker' | 'styles'>) => {
     const {palette} = useTheme()
     return <ColorDialogBase {...props} ColorPicker={ChromePicker} styles={stylesDialog(palette)}/>
 }
 
-const stylesStatic = palette => merge({
+const stylesStatic = palette => mergeStyles({
     'default': {
         picker: {
             boxShadow: '0',
@@ -45,7 +44,7 @@ const stylesStatic = palette => merge({
     },
 }, chromeStyles(palette))
 
-export const ColorStatic = (props: Omit<ColorStaticBaseProps, 'ColorPicker' | 'styles'> & WithScalarValue) => {
+export const ColorStatic = (props: Omit<ColorStaticBaseProps, 'ColorPicker' | 'styles'>) => {
     const {palette} = useTheme()
     return <ColorStaticBase {...props} ColorPicker={ChromePicker} styles={stylesStatic(palette)}/>
 }

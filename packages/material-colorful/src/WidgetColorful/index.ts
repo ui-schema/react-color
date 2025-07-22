@@ -1,1 +1,1 @@
-export * from './WidgetColorful'
+export * from './WidgetColorful.js'

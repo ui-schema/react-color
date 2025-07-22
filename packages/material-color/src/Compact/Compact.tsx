@@ -1,11 +1,10 @@
-import { WithScalarValue } from '@ui-schema/ui-schema'
 import { List } from 'immutable'
 import { CompactPicker } from 'react-color'
 import { useTheme } from '@mui/material/styles'
 import { ColorBase, ColorBaseProps } from '@ui-schema/material-color/Base/ColorBase'
-import React from 'react'
+import * as React from 'react'
 
-export const ColorCompact = (props: Omit<ColorBaseProps, 'ColorPicker' | 'styles'> & WithScalarValue) => {
+export const ColorCompact = (props: Omit<ColorBaseProps, 'ColorPicker' | 'styles'>) => {
     const {palette} = useTheme()
     const styles = {
         'default': {compact: {background: palette.background.paper}},

@@ -1,7 +1,6 @@
 import { useTheme } from '@mui/material/styles'
 import { ColorBase, ColorBaseProps } from '@ui-schema/material-color/Base/ColorBase'
-import { WithScalarValue } from '@ui-schema/ui-schema'
-import React from 'react'
+import * as React from 'react'
 import { styleWrapper } from '@ui-schema/material-color/styleWrapper'
 import { AlphaPicker } from 'react-color'
 
@@ -14,7 +13,7 @@ const WrappedAlphaPicker = p => {
     </div>
 }
 
-export const ColorAlpha = (props: Omit<ColorBaseProps, 'ColorPicker' | 'styles'> & WithScalarValue) => {
+export const ColorAlpha = (props: Omit<ColorBaseProps, 'ColorPicker' | 'styles'>) => {
     return <ColorBase {...props} ColorPicker={WrappedAlphaPicker}/>
 }
 

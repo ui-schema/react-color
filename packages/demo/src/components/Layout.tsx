@@ -1,8 +1,8 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { PageHome } from '../pages/PageHome'
-import { PageDemoWidget } from '../pages/PageDemoWidget'
-import { PageDemoWidgetColorful } from '../pages/PageDemoWidgetColorful'
+import { PageHome } from '../pages/PageHome.js'
+import { PageDemoWidget } from '../pages/PageDemoWidget.js'
+import { PageDemoWidgetColorful } from '../pages/PageDemoWidgetColorful.js'
 
 export const Layout: React.ComponentType<{}> = () => {
     const scrollWrapper = React.useRef<HTMLDivElement | null>(null)

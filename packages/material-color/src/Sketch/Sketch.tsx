@@ -1,12 +1,11 @@
-import { WithScalarValue } from '@ui-schema/ui-schema'
 import { List } from 'immutable'
 import { SketchPicker } from 'react-color'
-import merge from 'deepmerge'
 import { useTheme } from '@mui/material/styles'
-import React from 'react'
+import * as React from 'react'
 import { ColorBase, ColorBaseProps } from '@ui-schema/material-color/Base/ColorBase'
 import { ColorStaticBase, ColorStaticBaseProps } from '@ui-schema/material-color/Base/ColorStaticBase'
 import { ColorDialogBase, ColorDialogBaseProps } from '@ui-schema/material-color/Base/ColorDialogBase'
+import { mergeStyles } from '../mergeStyles/index.js'
 
 const styles = ({palette, spacing}) => ({
     'default': {
@@ -19,7 +18,7 @@ const styles = ({palette, spacing}) => ({
     },
 })
 
-export const ColorSketch = (props: Omit<ColorBaseProps, 'ColorPicker' | 'styles'> & WithScalarValue) => {
+export const ColorSketch = (props: Omit<ColorBaseProps, 'ColorPicker' | 'styles'>) => {
     const theme = useTheme()
 
     const pickerProps = props.pickerProps || {}
@@ -34,7 +33,7 @@ export const ColorSketch = (props: Omit<ColorBaseProps, 'ColorPicker' | 'styles'
     />
 }
 
-const stylesDialog = ({palette, spacing}) => merge(styles({palette, spacing}), ({
+const stylesDialog = ({palette, spacing}) => mergeStyles(styles({palette, spacing}), ({
     'default': {
         picker: {
             boxShadow: 0,
@@ -42,7 +41,7 @@ const stylesDialog = ({palette, spacing}) => merge(styles({palette, spacing}), (
     },
 }))
 
-export const ColorSketchDialog = (props: Omit<ColorDialogBaseProps, 'ColorPicker' | 'styles'> & WithScalarValue) => {
+export const ColorSketchDialog = (props: Omit<ColorDialogBaseProps, 'ColorPicker' | 'styles'>) => {
     const theme = useTheme()
 
     const pickerProps = props.pickerProps || {}
@@ -56,7 +55,7 @@ export const ColorSketchDialog = (props: Omit<ColorDialogBaseProps, 'ColorPicker
     />
 }
 
-const stylesStatic = ({palette, spacing}) => merge(styles({palette, spacing}), ({
+const stylesStatic = ({palette, spacing}) => mergeStyles(styles({palette, spacing}), ({
     'default': {
         picker: {
             boxShadow: 0,
@@ -68,12 +67,12 @@ const stylesStatic = ({palette, spacing}) => merge(styles({palette, spacing}), (
     },
 }))
 
-export const ColorSketchStatic = (props: Omit<ColorStaticBaseProps, 'ColorPicker' | 'styles'> & WithScalarValue) => {
+export const ColorSketchStatic = (props: Omit<ColorStaticBaseProps, 'ColorPicker' | 'styles'>) => {
     const theme = useTheme()
 
     const pickerProps = props.pickerProps || {}
-    if(props.schema.getIn(['view', 'colors'])) {
-        pickerProps['presetColors'] = (props.schema.getIn(['view', 'colors']) as List<string>).toArray()
+    if(props.schema?.getIn(['view', 'colors'])) {
+        pickerProps['presetColors'] = (props.schema?.getIn(['view', 'colors']) as List<string>).toArray()
     }
 
     return <ColorStaticBase

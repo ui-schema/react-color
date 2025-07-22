@@ -1,13 +1,24 @@
-import React from 'react'
-import { fromJSOrdered, WidgetProps, WithScalarValue, WithValue } from '@ui-schema/ui-schema'
-import { TransTitle } from '@ui-schema/ui-schema/Translate'
+import { fromJSOrdered } from '@ui-schema/ui-schema/createMap'
+import * as React from 'react'
+import { WidgetProps } from '@ui-schema/react/Widget'
+import { TranslateTitle } from '@ui-schema/react/TranslateTitle'
 import Box from '@mui/material/Box'
 import FormLabel from '@mui/material/FormLabel'
 import { useTheme } from '@mui/material/styles'
-import { AnyColor, ColorPickerBaseProps } from 'react-colorful/dist/types'
 import { ValidityHelperText } from '@ui-schema/ds-material/Component'
 import FormHelperText from '@mui/material/FormHelperText'
-import { OrderedMap } from 'immutable'
+import { Map, OrderedMap } from 'immutable'
+import type { HslaColor, HslColor, HsvaColor, HsvColor, RgbaColor, RgbColor } from 'react-colorful'
+
+type ObjectColor = RgbColor | HslColor | HsvColor | RgbaColor | HslaColor | HsvaColor
+type AnyColor = string | ObjectColor
+
+type ColorPickerHTMLAttributes = Omit<React.HTMLAttributes<HTMLDivElement>, 'color' | 'onChange' | 'onChangeCapture'>
+
+interface ColorPickerBaseProps<T extends AnyColor> extends ColorPickerHTMLAttributes {
+    color: T
+    onChange: (newColor: T) => void
+}
 
 export type ColorfulComponent<T extends AnyColor> = React.FC<ColorPickerBaseProps<T>>
 
@@ -20,7 +31,7 @@ export const WidgetColorful = <T extends AnyColor, P extends WidgetProps = Widge
         storeKeys, schema, value, onChange,
         showValidity, valid, errors, required,
         ColorfulPicker,
-    }: P & (WithScalarValue | WithValue) & WidgetColorfulProps<T>,
+    }: P & WidgetColorfulProps<T>,
 ): React.ReactElement => {
     const handleOnChange = React.useCallback((color: AnyColor) => {
         onChange({
@@ -50,7 +61,7 @@ export const WidgetColorful = <T extends AnyColor, P extends WidgetProps = Widge
     return <>
         {hideTitle ? null :
             <FormLabel error={(!valid && showValidity)}>
-                <TransTitle storeKeys={storeKeys} schema={schema}/>
+                <TranslateTitle storeKeys={storeKeys} schema={schema}/>
                 {required ? ' *' : null}
             </FormLabel>}
 
@@ -61,7 +72,7 @@ export const WidgetColorful = <T extends AnyColor, P extends WidgetProps = Widge
             }}
         >
             <ColorfulPicker
-                color={typeof value === 'string' ? value : value?.toJS()}
+                color={(typeof value === 'string' ? value : Map.isMap(value) ? value?.toJS() : value && typeof value === 'object' ? value : '') as T}
                 onChange={handleOnChange}
                 style={pickerStyles}
             />

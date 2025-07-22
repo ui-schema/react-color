@@ -1,12 +1,9 @@
-import { MuiWidgetBinding } from '@ui-schema/ds-material/widgetsBinding'
-import { WithScalarValue } from '@ui-schema/ui-schema'
-import { WidgetProps } from '@ui-schema/ui-schema/Widget'
-import React from 'react'
+import { WidgetProps } from '@ui-schema/react/Widget'
+import * as React from 'react'
 import InputAdornment from '@mui/material/InputAdornment'
 import Palette from '@mui/icons-material/Palette'
 import { StringRenderer } from '@ui-schema/ds-material/Widgets/TextField'
 import { convertColor } from '@ui-schema/material-color/Base/transformers'
-import merge from 'deepmerge'
 import { Classes } from 'reactcss'
 import { ColorPickerProps } from 'react-color'
 
@@ -24,7 +21,7 @@ export type ColorPicker = React.ComponentType<ColorPickerProps<any> & {
     [k: string]: any
 }>
 
-export interface ColorBaseProps extends WidgetProps<MuiWidgetBinding<{}>> {
+export interface ColorBaseProps extends WidgetProps {
     styles?: Partial<Classes<any>>
     refocus?: boolean
     forceIcon?: boolean
@@ -60,7 +57,7 @@ export const ColorBase = (
         styles: customStyles = {}, refocus = true, forceIcon = false,
         pickerProps = {},
         ...props
-    }: ColorBaseProps & WithScalarValue,
+    }: ColorBaseProps,
 ) => {
     const inputRef = React.useRef<HTMLInputElement | null>(null)
     const [hasFocus, setHasFocus] = React.useState(false)
@@ -73,7 +70,7 @@ export const ColorBase = (
         </InputAdornment>,
     } : {}
 
-    const styles = merge({}, customStyles)
+    const styles = customStyles
     const format = schema.get('format')
 
     const PickerWrapper = PickerContainer || PickerPosition
