@@ -39,7 +39,32 @@ export const WidgetColorful = <T extends AnyColor, P extends WidgetProps = Widge
             scopes: ['value'],
             type: 'set',
             data: {
-                value: typeof color === 'string' ? color : fromJSOrdered(color),
+                value:
+                    typeof color === 'string' ? color :
+                        fromJSOrdered(Object.fromEntries(Object.entries(color).map(([k, v]) => {
+                            if(Number.isNaN(v)) {
+                                switch(k) {
+                                    case 'a':
+                                        v = 1
+                                        break
+                                    case 'l':
+                                        v = 100
+                                        break
+                                    case 'h':
+                                    case 's':
+                                    case 'v':
+                                        v = 0
+                                        break
+                                    case 'r':
+                                    case 'g':
+                                    case 'b':
+                                        v = 0
+                                        break
+                                }
+                            }
+
+                            return [k, v]
+                        }))),
             },
             schema,
             required,
@@ -58,6 +83,9 @@ export const WidgetColorful = <T extends AnyColor, P extends WidgetProps = Widge
     }), [palette, pickerWidth, pickerHeight, valid])
 
     const showValueText = schema?.getIn(['view', 'showValueText']) as boolean
+
+    const colorString = getColorString(value)
+
     return <>
         {hideTitle ? null :
             <FormLabel error={(!valid && showValidity)}>
@@ -77,8 +105,26 @@ export const WidgetColorful = <T extends AnyColor, P extends WidgetProps = Widge
                 style={pickerStyles}
             />
         </Box>
-        {showValueText ?
-            <Box ml={1}>
+
+        {showValueText && value ?
+            <Box ml={0.5} sx={{display: 'flex', alignItems: 'center', gap: 0.75}}>
+                <Box
+                    sx={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        border: '1px solid ' + palette.divider,
+                        fontSize: '14px',
+                        lineHeight: 0,
+                        height: '18px',
+                        width: '18px',
+                        borderRadius: 1,
+                        backgroundColor: colorString,
+                        color: colorString ? palette.getContrastText(colorString) : undefined,
+                    }}
+                >
+                    <span>{'a'}</span>
+                </Box>
                 <FormHelperText>
                     {typeof value === 'string' ? value :
                         (value as OrderedMap<string, number>)?.map((val, k) =>
@@ -89,4 +135,24 @@ export const WidgetColorful = <T extends AnyColor, P extends WidgetProps = Widge
 
         <ValidityHelperText errors={errors} showValidity={showValidity} schema={schema}/>
     </>
+}
+
+/**
+ * Turns the value into a `rgb`/`hsl` css string.
+ */
+function getColorString(value: unknown) {
+    if(typeof value === 'string') {
+        return value
+    }
+
+    if(Map.isMap(value)) {
+        if(value.has('r') && value.has('g') && value.has('b')) {
+            return `rgb(${value.get('r')}, ${value.get('g')}, ${value.get('b')}, ${value.get('a', 1)})`
+        }
+        if(value.has('h') && value.has('s') && value.has('l')) {
+            return `hsl(${value.get('h')}, ${value.get('s')}%, ${value.get('l')}%, ${value.get('a', 1)})`
+        }
+    }
+
+    return undefined
 }

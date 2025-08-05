@@ -1,4 +1,7 @@
-import { baseComponents, bindingExtended, MuiBinding, SchemaGridHandler, typeWidgets } from '@ui-schema/ds-material'
+import { MuiBinding, SchemaGridHandler } from '@ui-schema/ds-material'
+import { bindingComponents } from '@ui-schema/ds-material/Binding/Components'
+import { widgetsDefault } from '@ui-schema/ds-material/Binding/WidgetsDefault'
+import { widgetsExtended } from '@ui-schema/ds-material/Binding/WidgetsExtended'
 import { requiredPlugin, validatorPlugin } from '@ui-schema/json-schema'
 import { DefaultHandler, ValidityReporter } from '@ui-schema/react'
 import { schemaPluginsAdapterBuilder } from '@ui-schema/react/SchemaPluginsAdapter'
@@ -38,12 +41,12 @@ const ColorfulRgbaBase: React.FC<WidgetProps> =
 // const ColorfulRgba = extractValue(memo(ColorfulRgbaBase))
 
 export const customWidgets: MuiBinding = {
-    ...baseComponents,
+    ...bindingComponents,
 
     // Widget mapping by schema type or custom ID.
     widgets: {
-        ...typeWidgets,
-        ...bindingExtended,
+        ...widgetsDefault,
+        ...widgetsExtended,
 
         Color,
         ColorDialog,
