@@ -2,16 +2,7 @@
     "name": "@ui-schema/material-color",
     "version": "0.5.0-alpha.0",
     "description": "React color pickers as MUI widgets for UI-Schema - using react-color.",
-    "author": {
-        "name": "bemit",
-        "url": "https://bemit.codes"
-    },
-    "contributors": [
-        {
-            "name": "Michael Becker",
-            "url": "https://i-am-digital.eu"
-        }
-    ],
+    "author": "Michael Becker <michael@bemit.codes> (https://bemit.codes)",
     "license": "MIT",
     "keywords": [
         "ui-schema",
@@ -27,6 +18,7 @@
         "color picker",
         "picker"
     ],
+    "homepage": "https://github.com/ui-schema/react-color/tree/main/packages/material-color",
     "repository": {
         "type": "git",
         "url": "https://github.com/ui-schema/react-color.git",
